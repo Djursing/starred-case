@@ -22,24 +22,10 @@ Techstack:
 git clone git@github.com:Djursing/starred-case.git
 ```
 
-## Backend
+#### Backend
 ```
 cd backend
 npm install
-```
-
-#### Run Migrations
-```
-node ace migration:fresh
-```
-
-#### Seed DB
-```
-node ace db:seed
-```
-
-#### Start Backend server
-```
 node ace serve
 ```
 Backend can be accessed via `localhost:3333`
