@@ -42,13 +42,14 @@ const JobListPage = () => {
         className="border p-2 rounded mb-4"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 mt-4">
-        {data?.data.map((job) => (
+        {data?.data && data?.data.map((job) => (
           <div key={job.id} className="max-w-xl divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
             <div className="px-4 py-5 sm:px-6 text-ellipsis">
-              {job.title}
+              <p className="text-gray-700 text-lg truncate">{job.title}</p>
             </div>
-            <div className="px-4 py-5 sm:p-6">
+            <div className="flex flex-col gap-4 px-4 py-5 sm:p-6">
               <p className="text-gray-600 truncate">{job.description}</p>
+              <p className="text-gray-400 truncate">{job.company}</p>
             </div>
           </div>
         ))}
