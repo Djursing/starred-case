@@ -46,13 +46,15 @@ type JobListResponse = {
 export default class JobsController {
   public async index({ request, response }: HttpContext) {
     try {
-      const { search, page } = request.qs()
+      let { search, page } = request.qs()
       // The pagination of the external api is zero index based, this might change in the future.
       // We should reach out to the API team to get more insight, but for now we assume it is stable and won't change soon.
       // We do not know what the LastPage value is when searching via the ../jobs/recommendation, so we set it to 0 for now.
       // Reach out to UX and see how many items per page they want to display, as this might differ from what the external api returns.
+      page = page && page >= 0 ? page : 0;
+
       const pagination = {
-        currentPage: !page || page < 0 ? 0 : page,
+        currentPage: page,
         firstPage: 0,
         lastPage: 0,
       }
@@ -93,7 +95,7 @@ export default class JobsController {
     } catch (error) {
       // We should take care of different errors, for now we log out the specific error
       // while sending the same error to the frontend.
-      console.log('Error fetching jobs', error)
+      console.log(error)
       return response.status(500).json({
         error: 'Error fetching jobs', // Error key here
       })
